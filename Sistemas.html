@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Sistemas - Su Transporte</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .chart-container {
+      margin-bottom: 2rem;
+    }
+    canvas {
+      max-width: 100%;
+    }
+    .image-row {
+      display: flex;
+      justify-content: space-around;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .image-row img {
+      max-width: 300px;
+      width: 100%;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Desempeño del Equipo de Sistemas</h1>
+    <p>Su Transporte</p>
+  </header>
+  <div class="container">
+    <div class="image-row">
+      <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Trabajo en equipo TI">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Código de software">
+      <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60" alt="Servidor de datos">
+    </div>
+    <div class="chart-container">
+      <h2>Tareas completadas por integrante</h2>
+      <canvas id="tareasChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h2>Tickets resueltos por mes</h2>
+      <canvas id="ticketsChart"></canvas>
+    </div>
+  </div>
+  <script>
+    // Datos simulados de desempeño
+    const nombres = ["Laura Hernandez", "Alfredo Morgado", "Oscar Sánchez", "Jorge Cortes", "Erick Argumedo"];
+    const tareas = [45, 39, 50, 30, 42];
+    const ticketsPorMes = {
+      labels: ["Enero", "Febrero", "Marzo", "Abril"],
+      data: [120, 95, 102, 110]
+    };
+
+    // Gráfica de barras para tareas completadas
+    new Chart(document.getElementById('tareasChart'), {
+      type: 'bar',
+      data: {
+        labels: nombres,
+        datasets: [{
+          label: 'Tareas completadas',
+          data: tareas,
+          backgroundColor: 'rgba(59, 130, 246, 0.7)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Gráfica de línea para tickets resueltos
+    new Chart(document.getElementById('ticketsChart'), {
+      type: 'line',
+      data: {
+        labels: ticketsPorMes.labels,
+        datasets: [{
+          label: 'Tickets resueltos',
+          data: ticketsPorMes.data,
+          fill: false,
+          borderColor: 'rgba(16, 185, 129, 1)',
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  </script>
+</body>
+</html>
